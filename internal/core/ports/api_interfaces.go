@@ -6,20 +6,6 @@ import (
 	"infctas/internal/core/entities"
 )
 
-/*
-/getModulo
-/getModulos
-/createModulo
-/setStatusModulo
-/setCoordinador
-/setResponsable
-/setAreas
-/setScript
-/setMail
-/setDescripcion
-/setLayOut
-*/
-
 type MouduleAPI interface {
 	GetModulo(ctx context.Context, id int) (*entities.Module, error)
 	GetModulos(ctx context.Context) ([]entities.Module, error)

@@ -2,9 +2,7 @@ package entities
 
 type Layout struct {
 	ID       int    `json:"id" db:"id"`
-	Cuenta   string `json:"cuenta" db:"cuenta"`
-	Tipo     string `json:"tipo" db:"tipo"`
-	Oferta   string `json:"oferta" db:"oferta"`
+	ModuleID int    `json:"moduleid" db:"moduleid"`
 	Columna1 string `json:"columna1" db:"columna1"`
 	Columna2 string `json:"columna2" db:"columna2"`
 	Columna3 string `json:"columna3" db:"columna3"`

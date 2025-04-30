@@ -18,7 +18,7 @@ func NewMSSQLModuleRepo(db *sql.DB) *MSSQLModuleRepo {
 }
 
 func (M MSSQLModuleRepo) InsertModule(module entities.Module) (int, error) {
-	exec, err := M.DB.Exec("INSERT INTO Modulos (Nombre, Descripcion, Status, CoordinadorID, Responsable1ID, Responsable2ID) VALUES (?, ?, ?, ?, ?, ?)", module.Name, module.Description, module.Status, module.CoordinadorID, module.Responsable1ID, module.Responsable2ID)
+	exec, err := M.DB.Exec("INSERT INTO Modulos (Nombre, Descripcion, CoordinadorID) VALUES (?, ?, ?, ?, ?, ?)", module.Name, module.Description, module.CoordinadorID)
 	if err != nil {
 		return 0, err
 	}
@@ -26,13 +26,13 @@ func (M MSSQLModuleRepo) InsertModule(module entities.Module) (int, error) {
 	if err != nil {
 		return 0, err
 	}
-	return int(id), nil
+	return int(id), nilw
 }
 
 func (M MSSQLModuleRepo) FindModuleByID(id int) (*entities.Module, error) {
 	row := M.DB.QueryRow("SELECT * FROM Modulos WHERE ID = ?", id)
 	module := &entities.Module{}
-	err := row.Scan(&module.ID, &module.Name, &module.Description, &module.Status, &module.Script, &module.Mail, &module.FechaCreacion, &module.FechaModificacion, &module.FechaEliminacion, &module.CoordinadorID, &module.Responsable1ID, &module.Responsable2ID, &module.LayOutID)
+	err := row.Scan(&module.ID, &module.Name, &module.Description, &module.Status, &module.Script, &module.Mail, &module.FechaCreacion, &module.FechaModificacion, &module.FechaEliminacion, &module.CoordinadorID)
 	if err != nil {
 		return nil, err
 	}
@@ -54,7 +54,7 @@ func (M MSSQLModuleRepo) FindAllModules() ([]entities.Module, error) {
 	var modules []entities.Module
 	for rows.Next() {
 		module := entities.Module{}
-		err := rows.Scan(&module.ID, &module.Name, &module.Description, &module.Status, &module.Script, &module.Mail, &module.FechaCreacion, &module.FechaModificacion, &module.FechaEliminacion, &module.CoordinadorID, &module.Responsable1ID, &module.Responsable2ID, &module.LayOutID)
+		err := rows.Scan(&module.ID, &module.Name, &module.Description, &module.Status, &module.Script, &module.Mail, &module.FechaCreacion, &module.FechaModificacion, &module.FechaEliminacion, &module.CoordinadorID)
 		if err != nil {
 			return nil, err
 		}
@@ -64,7 +64,7 @@ func (M MSSQLModuleRepo) FindAllModules() ([]entities.Module, error) {
 }
 
 func (M MSSQLModuleRepo) UpdateModule(module entities.Module) error {
-	_, err := M.DB.Exec("UPDATE Modulos SET Nombre = ?, Descripcion = ?, Status = ?, CoordinadorID = ?, Responsable1ID = ?, Responsable2ID = ? WHERE ID = ?", module.Name, module.Description, module.Status, module.CoordinadorID, module.Responsable1ID, module.Responsable2ID, module.ID)
+	_, err := M.DB.Exec("UPDATE Modulos SET Nombre = ?, Descripcion = ?, Status = ?, CoordinadorID = ? WHERE ID = ?", module.Name, module.Description, module.Status, module.CoordinadorID, module.ID)
 	if err != nil {
 		return err
 	}
