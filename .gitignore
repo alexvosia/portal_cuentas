@@ -1,0 +1,45 @@
+# Golang project
+# Binaries for programs and plugins
+*.exe
+*.exe~
+*.dll
+*.so
+*.dylib
+
+# Test binary, build with `go test -c`
+*.test
+
+# VSCode
+.vscode/
+.vscode-test/
+
+# GoLand
+.idea/
+
+# Go workspace
+go.work
+# Go modules
+# Go modules - vendor directory
+vendor/
+
+# Go modules - cached dependencies
+
+main
+infctas
+config.json
+
+# Environment variables
+*.env
+
+*.env.local
+*.env.development.local
+*.env.test.local
+*.env.production.local
+*.env.development
+*.env.test
+*.env.production
+
+*.xlsx
+*.xls
+*.csv
+
