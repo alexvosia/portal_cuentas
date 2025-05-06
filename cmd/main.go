@@ -12,7 +12,7 @@ import (
 
 func main() {
 	// Configurar conexión a la base de datos
-	db, err := sql.Open("mssql", "sqlserver://username:password@localhost:1433?database=dbname")
+	db, err := sql.Open("mssql", "sqlserver://pic_owner:pic_1234@localhost:1433?database=pic")
 	if err != nil {
 		log.Fatal(err)
 	}

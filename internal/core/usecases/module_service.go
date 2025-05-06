@@ -40,8 +40,8 @@ func (m ModuleService) CreateModulo(ctx context.Context, name string, descripcio
 		return nil, ports.ErrInvalidData
 	}
 	module := entities.Module{
-		Name:          name,
-		Description:   descripcion,
+		Nombre:        name,
+		Descripcion:   descripcion,
 		CoordinadorID: coordinador,
 		Areas:         areas,
 		Mail:          mail,
@@ -63,7 +63,7 @@ func (m ModuleService) SetStatusModulo(ctx context.Context, id int, status int) 
 	if err != nil {
 		return nil, err
 	}
-	module.Status = status
+	module.Estado = status
 	err = m.Repo.UpdateModule(*module)
 	if err != nil {
 		return nil, err
@@ -166,7 +166,7 @@ func (m ModuleService) SetDescripcion(ctx context.Context, id int, descripcion s
 	if err != nil {
 		return nil, err
 	}
-	module.Description = descripcion
+	module.Descripcion = descripcion
 	err = m.Repo.UpdateModule(*module)
 	if err != nil {
 		return nil, err

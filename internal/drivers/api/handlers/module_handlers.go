@@ -57,7 +57,7 @@ func (h *ModuleHandler) CreateModuloHandler(w http.ResponseWriter, r *http.Reque
 		respondError(w, http.StatusBadRequest, "Invalid request payload")
 		return
 	}
-	newModule, err := h.MouduleAPI.CreateModulo(r.Context(), module.Name, module.Description, module.CoordinadorID, module.Areas, module.Mail, module.Script)
+	newModule, err := h.MouduleAPI.CreateModulo(r.Context(), module.Nombre, module.Descripcion, module.CoordinadorID, module.Areas, module.Mail, module.Script)
 	if err != nil {
 		respondError(w, http.StatusInternalServerError, "Error creating module")
 		return
