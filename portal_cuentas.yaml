@@ -1,0 +1,258 @@
+openapi: 3.0.0
+info:
+  title: Portal Cuentas API
+  version: 1.0.0
+  description: Documentación de la API para el portal de carga y gestión de módulos y archivos CSV.
+paths:
+  /createModulo:
+    post:
+      summary: Crear un nuevo módulo
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/Module'
+      responses:
+        '200':
+          description: Módulo creado exitosamente
+  /getModulo/{idModulo}:
+    get:
+      summary: Obtener un módulo por ID
+      parameters:
+        - name: idModulo
+          in: path
+          required: true
+          schema:
+            type: string
+      responses:
+        '200':
+          description: Información del módulo
+  /getModulos/{rol}:
+    get:
+      summary: Obtener módulos por rol
+      parameters:
+        - name: rol
+          in: path
+          required: true
+          schema:
+            type: string
+      responses:
+        '200':
+          description: Lista de módulos
+  /setStatusModulo/{idModulo}/{status}/{user}:
+    put:
+      summary: Actualizar estado del módulo
+      parameters:
+        - name: idModulo
+          in: path
+          required: true
+          schema:
+            type: string
+        - name: status
+          in: path
+          required: true
+          schema:
+            type: string
+        - name: user
+          in: path
+          required: true
+          schema:
+            type: string
+      responses:
+        '200':
+          description: Estado actualizado
+  /setCoordinador/{idModulo}/{coordinador}/{user}:
+    put:
+      summary: Asignar coordinador al módulo
+      parameters:
+        - name: idModulo
+          in: path
+          required: true
+          schema:
+            type: string
+        - name: coordinador
+          in: path
+          required: true
+          schema:
+            type: string
+        - name: user
+          in: path
+          required: true
+          schema:
+            type: string
+      responses:
+        '200':
+          description: Coordinador asignado
+  /setResponsable/{idModulo}/{coordinador}/{responsable1}/{responsable2}/{user}:
+    put:
+      summary: Asignar responsables al módulo
+      parameters:
+        - name: idModulo
+          in: path
+          required: true
+          schema:
+            type: string
+        - name: coordinador
+          in: path
+          required: true
+          schema:
+            type: string
+        - name: responsable1
+          in: path
+          required: true
+          schema:
+            type: string
+        - name: responsable2
+          in: path
+          required: true
+          schema:
+            type: string
+        - name: user
+          in: path
+          required: true
+          schema:
+            type: string
+      responses:
+        '200':
+          description: Responsables asignados
+  /setAreas/{idModulo}/{areas}/{user}:
+    put:
+      summary: Asignar áreas al módulo
+      parameters:
+        - name: idModulo
+          in: path
+          required: true
+          schema:
+            type: string
+        - name: areas
+          in: path
+          required: true
+          schema:
+            type: string
+        - name: user
+          in: path
+          required: true
+          schema:
+            type: string
+      responses:
+        '200':
+          description: Áreas asignadas
+  /setScript/{idModulo}/{script}/{user}:
+    put:
+      summary: Asignar script SQL al módulo
+      parameters:
+        - name: idModulo
+          in: path
+          required: true
+          schema:
+            type: string
+        - name: script
+          in: path
+          required: true
+          schema:
+            type: string
+        - name: user
+          in: path
+          required: true
+          schema:
+            type: string
+      responses:
+        '200':
+          description: Script asignado
+  /setMail/{idModulo}/{mail}/{user}:
+    put:
+      summary: Asignar correo de notificación al módulo
+      parameters:
+        - name: idModulo
+          in: path
+          required: true
+          schema:
+            type: string
+        - name: mail
+          in: path
+          required: true
+          schema:
+            type: string
+        - name: user
+          in: path
+          required: true
+          schema:
+            type: string
+      responses:
+        '200':
+          description: Correo asignado
+  /setDescripcion/{idModulo}/{descripcion}/{user}:
+    put:
+      summary: Actualizar descripción del módulo
+      parameters:
+        - name: idModulo
+          in: path
+          required: true
+          schema:
+            type: string
+        - name: descripcion
+          in: path
+          required: true
+          schema:
+            type: string
+        - name: user
+          in: path
+          required: true
+          schema:
+            type: string
+      responses:
+        '200':
+          description: Descripción actualizada
+components:
+  schemas:
+    Module:
+      type: object
+      properties:
+        id:
+          type: string
+        nombre:
+          type: string
+        descripcion:
+          type: string
+        estado:
+          type: string
+        alcance:
+          type: string
+        coordinador:
+          type: string
+        responsable1:
+          type: string
+        responsable2:
+          type: string
+        script:
+          type: string
+        mail:
+          type: string
+        columna1:
+          type: string
+        columna2:
+          type: string
+        columna3:
+          type: string
+        columna4:
+          type: string
+        columna5:
+          type: string
+        columna6:
+          type: string
+        columna7:
+          type: string
+        columna8:
+          type: string
+        columna9:
+          type: string
+        Inicio:
+          type: string
+        Fin:
+          type: string
+        Creador:
+          type: string
+        Upper:
+          type: string
+

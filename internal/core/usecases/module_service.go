@@ -84,7 +84,7 @@ func (m ModuleService) SetCoordinador(ctx context.Context, idModulo int, idCoord
 	return module, nil
 }
 
-func (m ModuleService) SetResponsable(ctx context.Context, idModulo int, responsableid int, index int, upper int) (*entities.Module, error) {
+func (m ModuleService) SetResponsable(ctx context.Context, idModulo int, idCoordinador int, idResponsable1 int, idResponsable2 int, upper int) (*entities.Module, error) {
 	if id == 0 || responsableid == 0 {
 		return nil, ports.ErrInvalidData
 	}

@@ -30,15 +30,23 @@ func main() {
 
 	// Configurar Provider MSSQL
 	repo := pic_repo.NewMSSQLModuleRepo(db)
-
 	// Crear el servicio de repositorio de módulos
 	moduleservice := usecases.NewModuleService(repo)
-
 	// Crear el handler de Módulos
 	moduleHandler := handlers.NewModuleHandler(moduleservice)
-
 	// Configurar las rutas de modulos en la API
 	api.RegisterModuleRoutes(router, moduleHandler)
+
+	// Configurar el Provider ORCLChecaData
+	checaDataRepo := pic_repo.NewORCLChecaData(db)
+	// Crear el servicio de repositorio de ChecaData
+	checaDataService := usecases.NewChecaDataService(checaDataRepo)
+	// Crear el handler de ChecaData
+	checaDataHandler := handlers.NewChecaDataHandler(checaDataService)
+	// Configurar las rutas de ChecaData en la API
+	api.RegisterChecaDataRoutes(router, checaDataHandler)
+
+	// Crear el handler de Archivos
 
 	// Iniciar el servidor
 	log.Println("Iniciando servidor en :8080")
