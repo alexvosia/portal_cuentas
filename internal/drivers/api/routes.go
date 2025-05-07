@@ -15,13 +15,13 @@ func RegisterModuleRoutes(r *mux.Router, handlers *handlers.ModuleHandler) {
 	r.HandleFunc("/createModulo", handlers.CreateModuloHandler).Methods("POST")
 	r.HandleFunc("/getModulo/{id}", handlers.GetModuloHandler).Methods("GET")
 	r.HandleFunc("/getModulos/{rol}", handlers.GetModulosHandler).Methods("GET")
-	r.HandleFunc("/setStatusModulo/{id}/{status}", handlers.SetStatusModuloHandler).Methods("PUT")
-	r.HandleFunc("/setCoordinador/{id}/{coordinador}", handlers.SetCoordinadorHandler).Methods("PUT")
-	r.HandleFunc("/setResponsable/{coordinador}/{responsable1}/{responsable2}", handlers.SetResponsableHandler).Methods("PUT")
-	r.HandleFunc("/setAreas/{id}/{areas}", handlers.SetAreasHandler).Methods("PUT")
-	r.HandleFunc("/setScript/{id}/{script}", handlers.SetScriptHandler).Methods("PUT")
-	r.HandleFunc("/setMail/{id}/{mail}", handlers.SetMailHandler).Methods("PUT")
-	r.HandleFunc("/setDescripcion/{id}/{descripcion}", handlers.SetDescripcionHandler).Methods("PUT")
+	r.HandleFunc("/setStatusModulo/{id}/{status}/{user}", handlers.SetStatusModuloHandler).Methods("PUT")
+	r.HandleFunc("/setCoordinador/{id}/{coordinador}/{user}", handlers.SetCoordinadorHandler).Methods("PUT")
+	r.HandleFunc("/setResponsable/{id}/{coordinador}/{responsable1}/{responsable2}/{user}", handlers.SetResponsableHandler).Methods("PUT")
+	r.HandleFunc("/setAreas/{id}/{areas}/{user}", handlers.SetAreasHandler).Methods("PUT")
+	r.HandleFunc("/setScript/{id}/{script}/{user}", handlers.SetScriptHandler).Methods("PUT")
+	r.HandleFunc("/setMail/{id}/{mail}/{user}", handlers.SetMailHandler).Methods("PUT")
+	r.HandleFunc("/setDescripcion/{id}/{descripcion}/{user}", handlers.SetDescripcionHandler).Methods("PUT")
 }
 
 func RegisterChecaDataRoutes(r *mux.Router, handlers *handlers.ChecaDataHandler) {
