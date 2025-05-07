@@ -40,12 +40,15 @@ func (h *ModuleHandler) GetModuloHandler(w http.ResponseWriter, r *http.Request)
 }
 
 func (h *ModuleHandler) GetModulosHandler(w http.ResponseWriter, r *http.Request) {
+	vars := mux.Vars(r)
+	rol := vars["rol"]
 	// Implementar la lógica para manejar la solicitud de obtener todos los módulos
-	modules, err := h.MouduleAPI.GetModulos(r.Context())
+	modules, err := h.MouduleAPI.GetModulos(r.Context(), rol)
 	if err != nil {
 		respondError(w, http.StatusInternalServerError, "Error retrieving modules")
 		return
 	}
+
 	// Devolver la lista de módulos como respuesta
 	respondJSON(w, http.StatusOK, modules)
 }
@@ -57,7 +60,7 @@ func (h *ModuleHandler) CreateModuloHandler(w http.ResponseWriter, r *http.Reque
 		respondError(w, http.StatusBadRequest, "Invalid request payload")
 		return
 	}
-	newModule, err := h.MouduleAPI.CreateModulo(r.Context(), module.Nombre, module.Descripcion, module.CoordinadorID, module.Areas, module.Mail, module.Script)
+	newModule, err := h.MouduleAPI.CreateModulo(r.Context(), module)
 	if err != nil {
 		respondError(w, http.StatusInternalServerError, "Error creating module")
 		return
@@ -221,30 +224,6 @@ func (h *ModuleHandler) SetDescripcionHandler(w http.ResponseWriter, r *http.Req
 	// Devolver el módulo actualizado como respuesta
 	respondJSON(w, http.StatusOK, module)
 }
-
-/*
-func (h *ModuleHandler) SetLayOutHandler(w http.ResponseWriter, r *http.Request) {
-	// Implementar la lógica para manejar la solicitud de actualizar el layout de un módulo
-	vars := mux.Vars(r)
-	id, err := strconv.Atoi(vars["id"])
-	if err != nil {
-		respondError(w, http.StatusBadRequest, "Invalid module ID")
-		return
-	}
-	layoutID, err := strconv.Atoi(vars["layout"])
-	if err != nil {
-		respondError(w, http.StatusBadRequest, "Invalid layout ID")
-		return
-	}
-	module, err := h.MouduleAPI.SetLayOut(r.Context(), id, layoutID)
-	if err != nil {
-		respondError(w, http.StatusInternalServerError, "Error updating layout")
-		return
-	}
-	// Devolver el módulo actualizado como respuesta
-	respondJSON(w, http.StatusOK, module)
-}
-*/
 
 // Helper para respuestas de error
 func respondError(w http.ResponseWriter, code int, message string) {

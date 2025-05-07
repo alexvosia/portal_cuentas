@@ -24,29 +24,23 @@ func (m ModuleService) GetModulo(ctx context.Context, id int) (*entities.Module,
 	if err != nil {
 		return nil, ports.ErrModuleNotFound
 	}
+
 	return module, nil
 }
 
-func (m ModuleService) GetModulos(ctx context.Context) ([]entities.Module, error) {
-	modules, err := m.Repo.FindAllModules()
+func (m ModuleService) GetModulos(ctx context.Context, rol string) ([]entities.Module, error) {
+	modules, err := m.Repo.FindAllModules(rol)
 	if err != nil {
 		return nil, err
 	}
 	return modules, nil
 }
 
-func (m ModuleService) CreateModulo(ctx context.Context, name string, descripcion string, coordinador int, areas []entities.Area, mail string, script string) (*entities.Module, error) {
-	if name == "" || descripcion == "" {
+func (m ModuleService) CreateModulo(ctx context.Context, module entities.Module) (*entities.Module, error) {
+	if module.Nombre == "" || module.Descripcion == "" || module.Alcance == "" || module.Coordinador == "" || module.Respoonsable1 == "" || module.Respoonsable2 == "" || module.Columna1 == "" || module.Creador == 0 {
 		return nil, ports.ErrInvalidData
 	}
-	module := entities.Module{
-		Nombre:        name,
-		Descripcion:   descripcion,
-		CoordinadorID: coordinador,
-		Areas:         areas,
-		Mail:          mail,
-		Script:        script,
-	}
+
 	id, err := m.Repo.InsertModule(module)
 	if err != nil {
 		return nil, err

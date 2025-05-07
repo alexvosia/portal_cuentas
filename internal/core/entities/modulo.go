@@ -6,7 +6,9 @@ type Module struct {
 	Descripcion   string `json:"descripcion" db:"descripcion"`
 	Estado        int    `json:"estado" db:"estado"`
 	Alcance       string `json:"alcance" db:"alcance"`
-	IdCoordinador int    `json:"id_coordinador" db:"id_coordinador"`
+	Coordinador   string `json:"coordinador" db:"coordinador"`
+	Respoonsable1 string `json:"responsable1" db:"responsable1"`
+	Respoonsable2 string `json:"responsable2" db:"responsable2"`
 	Script        string `json:"script" db:"script"`
 	Mail          string `json:"mail" db:"mail"`
 	Columna1      string `json:"columna1" db:"columna1"`
