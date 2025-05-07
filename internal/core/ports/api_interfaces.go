@@ -13,7 +13,7 @@ var (
 )
 
 type MouduleAPI interface {
-	CreateModulo(ctx context.Context, nombre string, descripcion string, areas string, idCoordinador int, idResponsable1 int, idResponsable2 int, script string, mail string, columna1 string, columna2 string, columna3 string, columna4 string, columna5 string, columna6 string, columna7 string, columna8 string, columna9 string, creador int) (*entities.Module, error)
+	CreateModulo(ctx context.Context, module entities.Module) (*entities.Module, error)
 	GetModuloById(ctx context.Context, id int) (*entities.Module, error) // Obtener nombre de coordinador y responsables
 	GetModulos(ctx context.Context, role string) ([]entities.Module, error)
 	SetStatusModulo(ctx context.Context, id int, status int, upper int) (*entities.Module, error)

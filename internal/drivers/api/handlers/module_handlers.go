@@ -30,7 +30,7 @@ func (h *ModuleHandler) GetModuloHandler(w http.ResponseWriter, r *http.Request)
 		respondError(w, http.StatusBadRequest, "Invalid module ID")
 		return
 	}
-	module, err := h.MouduleAPI.GetModulo(r.Context(), id)
+	module, err := h.MouduleAPI.GetModuloById(r.Context(), id)
 	if err != nil {
 		respondError(w, http.StatusInternalServerError, "Error retrieving module")
 		return
@@ -114,7 +114,6 @@ func (h *ModuleHandler) SetCoordinadorHandler(w http.ResponseWriter, r *http.Req
 	respondJSON(w, http.StatusOK, module)
 }
 
-/*
 func (h *ModuleHandler) SetResponsableHandler(w http.ResponseWriter, r *http.Request) {
 	// Implementar la lógica para manejar la solicitud de actualizar los responsables de un módulo
 	vars := mux.Vars(r)
@@ -141,7 +140,6 @@ func (h *ModuleHandler) SetResponsableHandler(w http.ResponseWriter, r *http.Req
 	// Devolver el módulo actualizado como respuesta
 	respondJSON(w, http.StatusOK, module)
 }
-*/
 
 func (h *ModuleHandler) SetAreasHandler(w http.ResponseWriter, r *http.Request) {
 	// Implementar la lógica para manejar la solicitud de actualizar las áreas de un módulo

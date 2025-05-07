@@ -16,7 +16,7 @@ func NewModuleService(repo ports.ModuleRepo) *ModuleService {
 	}
 }
 
-func (m ModuleService) GetModulo(ctx context.Context, id int) (*entities.Module, error) {
+func (m ModuleService) GetModuloById(ctx context.Context, id int) (*entities.Module, error) {
 	if id == 0 {
 		return nil, ports.ErrInvalidData
 	}

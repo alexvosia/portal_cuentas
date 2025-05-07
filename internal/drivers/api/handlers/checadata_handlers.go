@@ -35,7 +35,7 @@ func (h *ChecaDataHandler) GetResponsablesHandler(w http.ResponseWriter, r *http
 	coordinador, err := strconv.Atoi(vars["coordinador"])
 	responsables, err := h.ChecaDataAPI.GetResponsables(r.Context(), coordinador)
 	if err != nil {
-		respondError(w, http.StatusInternalServerError, "Error retrieving responsibles")
+		respondError(w, http.StatusInternalServerError, "Error retrieving responsible")
 		return
 	}
 

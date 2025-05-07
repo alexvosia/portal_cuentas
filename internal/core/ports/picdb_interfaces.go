@@ -5,7 +5,7 @@ import "infctas/internal/core/entities"
 type ModuleRepo interface {
 	InsertModule(module entities.Module) (int, error)
 	FindModuleByID(id int) (*entities.Module, error)
-	FindAllModules() ([]entities.Module, error)
+	FindAllModules(rol string) ([]entities.Module, error)
 	UpdateModule(module entities.Module) error
 }
 
