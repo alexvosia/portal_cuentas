@@ -5,14 +5,16 @@ import (
 	"infctas/internal/core/usecases"
 	"infctas/internal/drivers/api"
 	"infctas/internal/drivers/api/handlers"
-	"infctas/internal/providers/mssql_repo"
+	"infctas/internal/providers/pic_repo"
 	"log"
 	"net/http"
+
+	_ "github.com/denisenkom/go-mssqldb"
 )
 
 func main() {
 	// Configurar conexión a la base de datos
-	db, err := sql.Open("mssql", "sqlserver://username:password@localhost:1433?database=dbname")
+	db, err := sql.Open("sqlserver", "sqlserver://pic_owner:pic_1234@localhost:1433?database=pic")
 	if err != nil {
 		log.Fatal(err)
 	}
@@ -27,7 +29,7 @@ func main() {
 	router := api.NewRouter()
 
 	// Configurar Provider MSSQL
-	repo := mssql_repo.NewMSSQLModuleRepo(db)
+	repo := pic_repo.NewMSSQLModuleRepo(db)
 
 	// Crear el servicio de repositorio de módulos
 	moduleservice := usecases.NewModuleService(repo)
