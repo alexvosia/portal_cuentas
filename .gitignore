@@ -39,6 +39,7 @@ config.json
 *.env.test
 *.env.production
 
+*.zip
 *.xlsx
 *.xls
 *.csv

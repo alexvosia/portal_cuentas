@@ -30,7 +30,7 @@ func (m ModuleService) CreateModulo(ctx context.Context, module entities.Module)
 	return &module, nil
 }
 
-func (m ModuleService) GetModuloById(ctx context.Context, id int) (*entities.Module, error) {
+func (m ModuleService) GetModuloById(ctx context.Context, idModulo int) (*entities.Module, error) {
 	if id == 0 {
 		return nil, ports.ErrInvalidData
 	}
@@ -67,11 +67,12 @@ func (m ModuleService) SetStatusModulo(ctx context.Context, idModulo int, status
 	return module, nil
 }
 
-func (m ModuleService) SetCoordinador(ctx context.Context, id int, idCoordinador int) (*entities.Module, error) {
+func (m ModuleService) SetCoordinador(ctx context.Context, idModulo int, idCoordinador int, upper int) (*entities.Module, error) {
 	if id == 0 || idCoordinador == 0 {
 		return nil, ports.ErrInvalidData
 	}
 	module, err := m.Repo.FindModuleByID(id)
+
 	if err != nil {
 		return nil, err
 	}
@@ -83,7 +84,7 @@ func (m ModuleService) SetCoordinador(ctx context.Context, id int, idCoordinador
 	return module, nil
 }
 
-func (m ModuleService) SetResponsable(ctx context.Context, id int, responsableid int, index int) (*entities.Module, error) {
+func (m ModuleService) SetResponsable(ctx context.Context, idModulo int, responsableid int, index int, upper int) (*entities.Module, error) {
 	if id == 0 || responsableid == 0 {
 		return nil, ports.ErrInvalidData
 	}
@@ -104,7 +105,7 @@ func (m ModuleService) SetResponsable(ctx context.Context, id int, responsableid
 	return module, nil
 }
 
-func (m ModuleService) SetAreas(ctx context.Context, id int, areas []entities.Area) (*entities.Module, error) {
+func (m ModuleService) SetAreas(ctx context.Context, idModulo int, areas string, upper int) (*entities.Module, error) {
 	if id == 0 || len(areas) == 0 {
 		return nil, ports.ErrInvalidData
 	}
@@ -120,7 +121,7 @@ func (m ModuleService) SetAreas(ctx context.Context, id int, areas []entities.Ar
 	return module, nil
 }
 
-func (m ModuleService) SetScript(ctx context.Context, id int, script string) (*entities.Module, error) {
+func (m ModuleService) SetScript(ctx context.Context, id int, script string, upper int) (*entities.Module, error) {
 	if id == 0 || script == "" {
 		return nil, ports.ErrInvalidData
 	}
@@ -136,7 +137,7 @@ func (m ModuleService) SetScript(ctx context.Context, id int, script string) (*e
 	return module, nil
 }
 
-func (m ModuleService) SetMail(ctx context.Context, id int, mail string) (*entities.Module, error) {
+func (m ModuleService) SetMail(ctx context.Context, id int, mail string, upper int) (*entities.Module, error) {
 	if id == 0 || mail == "" {
 		return nil, ports.ErrInvalidData
 	}
@@ -152,7 +153,7 @@ func (m ModuleService) SetMail(ctx context.Context, id int, mail string) (*entit
 	return module, nil
 }
 
-func (m ModuleService) SetDescripcion(ctx context.Context, id int, descripcion string) (*entities.Module, error) {
+func (m ModuleService) SetDescripcion(ctx context.Context, id int, descripcion string, upper int) (*entities.Module, error) {
 	if id == 0 || descripcion == "" {
 		return nil, ports.ErrInvalidData
 	}

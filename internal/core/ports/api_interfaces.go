@@ -15,7 +15,7 @@ var (
 type MouduleAPI interface {
 	CreateModulo(ctx context.Context, module entities.Module) (*entities.Module, error)
 	GetModuloById(ctx context.Context, idModulo int) (*entities.Module, error) // Obtener nombre de coordinador y responsables
-	GetModulos(ctx context.Context, role string) ([]entities.Module, error)
+	GetModulos(ctx context.Context, rol string) ([]entities.Module, error)
 	SetStatusModulo(ctx context.Context, idModulo int, status int, upper int) (*entities.Module, error)
 	SetCoordinador(ctx context.Context, idModulo int, idCoordinador int, upper int) (*entities.Module, error)
 	SetResponsable(ctx context.Context, idModulo int, idCoordinador int, idResponsable1 int, idResponsable2 int, upper int) (*entities.Module, error)
