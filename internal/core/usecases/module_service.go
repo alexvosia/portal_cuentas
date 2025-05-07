@@ -4,6 +4,7 @@ import (
 	"context"
 	"infctas/internal/core/entities"
 	"infctas/internal/core/ports"
+	"strconv"
 )
 
 type ModuleService struct {
@@ -14,6 +15,19 @@ func NewModuleService(repo ports.ModuleRepo) *ModuleService {
 	return &ModuleService{
 		Repo: repo,
 	}
+}
+
+func (m ModuleService) CreateModulo(ctx context.Context, module entities.Module) (*entities.Module, error) {
+	if module.Nombre == "" || module.Descripcion == "" || module.Alcance == "" || module.Coordinador == "" || module.Respoonsable1 == "" || module.Respoonsable2 == "" || module.Columna1 == "" || module.Creador == 0 {
+		return nil, ports.ErrInvalidData
+	}
+
+	id, err := m.Repo.InsertModule(module)
+	if err != nil {
+		return nil, err
+	}
+	module.Id = id
+	return &module, nil
 }
 
 func (m ModuleService) GetModuloById(ctx context.Context, id int) (*entities.Module, error) {
@@ -36,24 +50,12 @@ func (m ModuleService) GetModulos(ctx context.Context, rol string) ([]entities.M
 	return modules, nil
 }
 
-func (m ModuleService) CreateModulo(ctx context.Context, module entities.Module) (*entities.Module, error) {
-	if module.Nombre == "" || module.Descripcion == "" || module.Alcance == "" || module.Coordinador == "" || module.Respoonsable1 == "" || module.Respoonsable2 == "" || module.Columna1 == "" || module.Creador == 0 {
+func (m ModuleService) SetStatusModulo(ctx context.Context, idModulo int, status int, upper int) (*entities.Module, error) {
+	if idModulo == 0 || status < 0 || status > 1 {
+
 		return nil, ports.ErrInvalidData
 	}
-
-	id, err := m.Repo.InsertModule(module)
-	if err != nil {
-		return nil, err
-	}
-	module.ID = id
-	return &module, nil
-}
-
-func (m ModuleService) SetStatusModulo(ctx context.Context, id int, status int) (*entities.Module, error) {
-	if id == 0 || status < 0 || status > 1 {
-		return nil, ports.ErrInvalidData
-	}
-	module, err := m.Repo.FindModuleByID(id)
+	module, err := m.Repo.FindModuleByID(idModulo)
 	if err != nil {
 		return nil, err
 	}
@@ -65,15 +67,15 @@ func (m ModuleService) SetStatusModulo(ctx context.Context, id int, status int) 
 	return module, nil
 }
 
-func (m ModuleService) SetCoordinador(ctx context.Context, id int, coordinadorid int) (*entities.Module, error) {
-	if id == 0 || coordinadorid == 0 {
+func (m ModuleService) SetCoordinador(ctx context.Context, id int, idCoordinador int) (*entities.Module, error) {
+	if id == 0 || idCoordinador == 0 {
 		return nil, ports.ErrInvalidData
 	}
 	module, err := m.Repo.FindModuleByID(id)
 	if err != nil {
 		return nil, err
 	}
-	module.CoordinadorID = coordinadorid
+	module.Coordinador = strconv.Itoa(idCoordinador)
 	err = m.Repo.UpdateModule(*module)
 	if err != nil {
 		return nil, err
@@ -81,7 +83,6 @@ func (m ModuleService) SetCoordinador(ctx context.Context, id int, coordinadorid
 	return module, nil
 }
 
-/*
 func (m ModuleService) SetResponsable(ctx context.Context, id int, responsableid int, index int) (*entities.Module, error) {
 	if id == 0 || responsableid == 0 {
 		return nil, ports.ErrInvalidData
@@ -102,7 +103,6 @@ func (m ModuleService) SetResponsable(ctx context.Context, id int, responsableid
 	}
 	return module, nil
 }
-*/
 
 func (m ModuleService) SetAreas(ctx context.Context, id int, areas []entities.Area) (*entities.Module, error) {
 	if id == 0 || len(areas) == 0 {
@@ -167,21 +167,3 @@ func (m ModuleService) SetDescripcion(ctx context.Context, id int, descripcion s
 	}
 	return module, nil
 }
-
-/*
-func (m ModuleService) SetLayOut(ctx context.Context, id int, layoutid int) (*entities.Module, error) {
-	if id == 0 || layoutid == 0 {
-		return nil, ports.ErrInvalidData
-	}
-	module, err := m.Repo.FindModuleByID(id)
-	if err != nil {
-		return nil, err
-	}
-	module.LayOutID = layoutid
-	err = m.Repo.UpdateModule(*module)
-	if err != nil {
-		return nil, err
-	}
-	return module, nil
-}
-*/

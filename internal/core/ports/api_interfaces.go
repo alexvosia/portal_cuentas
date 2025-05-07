@@ -40,3 +40,7 @@ type FileAPI interface {
 type ResponsableAPI interface {
 	GetResponsablesByCoordinador(ctx context.Context, idCoordinador int) (*entities.Responsables, error)
 }
+
+type CuentaAPI interface {
+	GetInfoCuenta(ctx context.Context, cuenta int, idArea int) (*entities.CtaRows, error)
+}

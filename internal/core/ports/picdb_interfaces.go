@@ -21,3 +21,4 @@ type ResponsableRepo interface {
 	FindResponsableByID(id int) (*entities.Responsables, error)
 	FindResponsableByCoordinador(idCoordinador int) (*entities.Responsables, error)
 }
+

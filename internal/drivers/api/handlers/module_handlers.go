@@ -39,7 +39,7 @@ func (h *ModuleHandler) GetModuloHandler(w http.ResponseWriter, r *http.Request)
 	// Implementar la lógica para manejar la solicitud de obtener un módulo
 	// Extraer el ID del módulo de la solicitud
 	vars := mux.Vars(r)
-	idModulo, err := strconv.Atoi(vars["id"])
+	idModulo, err := strconv.Atoi(vars["idModulo"])
 	if err != nil {
 		respondError(w, http.StatusBadRequest, "Invalid module ID")
 		return
@@ -70,7 +70,7 @@ func (h *ModuleHandler) GetModulosHandler(w http.ResponseWriter, r *http.Request
 func (h *ModuleHandler) SetStatusModuloHandler(w http.ResponseWriter, r *http.Request) {
 	// Implementar la lógica para manejar la solicitud de actualizar el estado de un módulo
 	vars := mux.Vars(r)
-	idModulo, err := strconv.Atoi(vars["id"])
+	idModulo, err := strconv.Atoi(vars["idModulo"])
 	if err != nil {
 		respondError(w, http.StatusBadRequest, "Invalid module ID")
 		return
@@ -100,7 +100,7 @@ func (h *ModuleHandler) SetStatusModuloHandler(w http.ResponseWriter, r *http.Re
 func (h *ModuleHandler) SetCoordinadorHandler(w http.ResponseWriter, r *http.Request) {
 	// Implementar la lógica para manejar la solicitud de actualizar el coordinador de un módulo
 	vars := mux.Vars(r)
-	idModulo, err := strconv.Atoi(vars["id"])
+	idModulo, err := strconv.Atoi(vars["idModulo"])
 	if err != nil {
 		respondError(w, http.StatusBadRequest, "Invalid module ID")
 		return
@@ -129,7 +129,7 @@ func (h *ModuleHandler) SetCoordinadorHandler(w http.ResponseWriter, r *http.Req
 func (h *ModuleHandler) SetResponsableHandler(w http.ResponseWriter, r *http.Request) {
 	// Implementar la lógica para manejar la solicitud de actualizar los responsables de un módulo
 	vars := mux.Vars(r)
-	idModulo, err := strconv.Atoi(vars["id"])
+	idModulo, err := strconv.Atoi(vars["idModulo"])
 	if err != nil {
 		respondError(w, http.StatusBadRequest, "Invalid module ID")
 		return
@@ -168,7 +168,7 @@ func (h *ModuleHandler) SetResponsableHandler(w http.ResponseWriter, r *http.Req
 func (h *ModuleHandler) SetAreasHandler(w http.ResponseWriter, r *http.Request) {
 	// Implementar la lógica para manejar la solicitud de actualizar las áreas de un módulo
 	vars := mux.Vars(r)
-	idModulo, err := strconv.Atoi(vars["id"])
+	idModulo, err := strconv.Atoi(vars["idModulo"])
 	if err != nil {
 		respondError(w, http.StatusBadRequest, "Invalid module ID")
 		return
@@ -196,7 +196,7 @@ func (h *ModuleHandler) SetAreasHandler(w http.ResponseWriter, r *http.Request) 
 func (h *ModuleHandler) SetScriptHandler(w http.ResponseWriter, r *http.Request) {
 	// Implementar la lógica para manejar la solicitud de actualizar el script de un módulo
 	vars := mux.Vars(r)
-	idModulo, err := strconv.Atoi(vars["id"])
+	idModulo, err := strconv.Atoi(vars["idModulo"])
 	if err != nil {
 		respondError(w, http.StatusBadRequest, "Invalid module ID")
 		return
@@ -222,7 +222,7 @@ func (h *ModuleHandler) SetScriptHandler(w http.ResponseWriter, r *http.Request)
 func (h *ModuleHandler) SetMailHandler(w http.ResponseWriter, r *http.Request) {
 	// Implementar la lógica para manejar la solicitud de actualizar el correo de un módulo
 	vars := mux.Vars(r)
-	idModulo, err := strconv.Atoi(vars["id"])
+	idModulo, err := strconv.Atoi(vars["idModulo"])
 	if err != nil {
 		respondError(w, http.StatusBadRequest, "Invalid module ID")
 		return
@@ -249,7 +249,7 @@ func (h *ModuleHandler) SetMailHandler(w http.ResponseWriter, r *http.Request) {
 func (h *ModuleHandler) SetDescripcionHandler(w http.ResponseWriter, r *http.Request) {
 	// Implementar la lógica para manejar la solicitud de actualizar la descripción de un módulo
 	vars := mux.Vars(r)
-	idModulo, err := strconv.Atoi(vars["id"])
+	idModulo, err := strconv.Atoi(vars["idModulo"])
 	if err != nil {
 		respondError(w, http.StatusBadRequest, "Invalid module ID")
 		return
