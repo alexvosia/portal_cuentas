@@ -32,7 +32,7 @@ func RegisterChecaDataRoutes(r *mux.Router, handlers *handlers.ChecaDataHandler)
 
 func RegisterFileRoutes(r *mux.Router, handlers *handlers.RegistryFileHandler) {
 	r.HandleFunc("/createFile", handlers.CreateRegistryFileHandler).Methods("POST")
-	r.HandleFunc("/getFilesByModulo/{idModulo}", handlers.GetFilesByModuloHandler).Methods("GET")
+	r.HandleFunc("/getFilesByModulo/{idModulo}", handlers.GetFileRegistryByModuloHandler).Methods("GET")
 	r.HandleFunc("/deleteFile/{idFile}/{upper}", handlers.SetFinHandler).Methods("PUT")
 }
 
