@@ -39,7 +39,7 @@ func (h *FileHandler) GetFilesByModuloHandler(w http.ResponseWriter, r *http.Req
 		respondError(w, http.StatusBadRequest, "Invalid module ID")
 		return
 	}
-	files, err := h.FileAPI.GetFilesByModulo(r.Context(), idModulo)
+	files, err := h.FileAPI.FindFilesByModule(r.Context(), idModulo)
 	if err != nil {
 		respondError(w, http.StatusInternalServerError, "Error retrieving files")
 		return
