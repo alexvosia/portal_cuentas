@@ -9,37 +9,37 @@ import (
 	"strconv"
 )
 
-type FileHandler struct {
-	ports.FileAPI
+type RegistryFileHandler struct {
+	ports.RegistryFileAPI
 }
 
-func NewFileHandler(api ports.FileAPI) *FileHandler {
-	return &FileHandler{
-		FileAPI: api,
+func NewFileHandler(api ports.RegistryFileAPI) *RegistryFileHandler {
+	return &RegistryFileHandler{
+		RegistryFileAPI: api,
 	}
 }
 
-func (h *FileHandler) CreateFileHandler(w http.ResponseWriter, r *http.Request) {
-	var file entities.FileCSV
+func (h *RegistryFileHandler) CreateRegistryFileHandler(w http.ResponseWriter, r *http.Request) {
+	var file entities.RegistryFileCSV
 	if err := json.NewDecoder(r.Body).Decode(&file); err != nil {
 		respondError(w, http.StatusBadRequest, "Invalid request payload")
 		return
 	}
-	err := h.FileAPI.CreateFile(r.Context(), file.Nombre, file.IdModulo, file.TipoRegistro, file.Creador)
+	err := h.RegistryFileAPI.CreateRegistryFile(r.Context(), file.Nombre, file.IdModulo, file.TipoRegistro, file.Creador)
 	if err != nil {
 		respondError(w, http.StatusInternalServerError, "Error creating file")
 		return
 	}
 }
 
-func (h *FileHandler) GetFilesByModuloHandler(w http.ResponseWriter, r *http.Request) {
+func (h *RegistryFileHandler) GetFileRegistryByModuloHandler(w http.ResponseWriter, r *http.Request) {
 	vars := mux.Vars(r)
 	idModulo, err := strconv.Atoi(vars["idModulo"])
 	if err != nil {
 		respondError(w, http.StatusBadRequest, "Invalid module ID")
 		return
 	}
-	files, err := h.FileAPI.FindFilesByModule(r.Context(), idModulo)
+	files, err := h.RegistryFileAPI.FindFilesByModule(r.Context(), idModulo)
 	if err != nil {
 		respondError(w, http.StatusInternalServerError, "Error retrieving files")
 		return
@@ -47,7 +47,7 @@ func (h *FileHandler) GetFilesByModuloHandler(w http.ResponseWriter, r *http.Req
 	respondJSON(w, http.StatusOK, files)
 }
 
-func (h *FileHandler) SetFinHandler(w http.ResponseWriter, r *http.Request) {
+func (h *RegistryFileHandler) SetFinHandler(w http.ResponseWriter, r *http.Request) {
 	vars := mux.Vars(r)
 	idFile, err := strconv.Atoi(vars["idFile"])
 	if err != nil {
@@ -59,7 +59,7 @@ func (h *FileHandler) SetFinHandler(w http.ResponseWriter, r *http.Request) {
 		respondError(w, http.StatusBadRequest, "Invalid upper ID")
 		return
 	}
-	file, err := h.FileAPI.SetFin(r.Context(), idFile, upper)
+	file, err := h.RegistryFileAPI.SetFinRegistryFile(r.Context(), idFile, upper)
 	if err != nil {
 		respondError(w, http.StatusInternalServerError, "Error setting file status")
 		return

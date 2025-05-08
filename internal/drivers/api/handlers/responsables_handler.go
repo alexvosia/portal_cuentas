@@ -17,7 +17,7 @@ func NewResponsableHandler(api ports.ResponsableAPI) *ResponsableHandler {
 	}
 }
 
-func (h *ResponsableHandler) GetResponsablesByCoordinadorHandler(w http.ResponseWriter, r *http.Request) {
+func (h *ResponsableHandler) GetResponsablesConfiguradosHandler(w http.ResponseWriter, r *http.Request) {
 	// Implementar la lógica para manejar la solicitud de obtener un responsable por coordinador
 	// Extraer el ID del coordinador de la solicitud
 	vars := mux.Vars(r)
@@ -26,7 +26,7 @@ func (h *ResponsableHandler) GetResponsablesByCoordinadorHandler(w http.Response
 		respondError(w, http.StatusBadRequest, "Invalid coordinator ID")
 		return
 	}
-	responsable, err := h.ResponsableAPI.FindResponsableByCoordinador(r.Context(), idCoordinador)
+	responsable, err := h.ResponsableAPI.GetResponsablesConfigurados(r.Context(), idCoordinador)
 	if err != nil {
 		respondError(w, http.StatusInternalServerError, "Error retrieving responsible person")
 		return

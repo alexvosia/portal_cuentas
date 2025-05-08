@@ -26,18 +26,18 @@ func RegisterModuleRoutes(r *mux.Router, handlers *handlers.ModuleHandler) {
 
 func RegisterChecaDataRoutes(r *mux.Router, handlers *handlers.ChecaDataHandler) {
 	r.HandleFunc("getCoordinadores", handlers.GetCoordinadoresHandler).Methods("GET")
-	r.HandleFunc("getPosiblesResponsables/{coordinador}", handlers.GetResponsablesHandler).Methods("GET")
+	r.HandleFunc("getPosiblesResponsables/{coordinador}", handlers.GetPosiblesResponsablesHandler).Methods("GET")
 	r.HandleFunc("getAreas", handlers.GetAreasHandler).Methods("GET")
 }
 
-func RegisterFileRoutes(r *mux.Router, handlers *handlers.FileHandler) {
-	r.HandleFunc("/createFile", handlers.CreateFileHandler).Methods("POST")
+func RegisterFileRoutes(r *mux.Router, handlers *handlers.RegistryFileHandler) {
+	r.HandleFunc("/createFile", handlers.CreateRegistryFileHandler).Methods("POST")
 	r.HandleFunc("/getFilesByModulo/{idModulo}", handlers.GetFilesByModuloHandler).Methods("GET")
 	r.HandleFunc("/deleteFile/{idFile}/{upper}", handlers.SetFinHandler).Methods("PUT")
 }
 
-func ResisterResponsableRoutes(r *mux.Router, handlers *handlers.ResponsableHandler) {
-	r.HandleFunc("/getResponsablesConfigurados/{coordinador}", handlers.GetResponsablesByCoordinadorHandler).Methods("GET")
+func RegisterResponsableRoutes(r *mux.Router, handlers *handlers.ResponsableHandler) {
+	r.HandleFunc("/getResponsablesConfigurados/{coordinador}", handlers.GetResponsablesConfiguradosHandler).Methods("GET")
 }
 
 func RegisterCuentaRoutes(r *mux.Router, handlers *handlers.CuentaHandler) {

@@ -1,6 +1,6 @@
 package entities
 
-type FileCSV struct {
+type RegistryFileCSV struct {
 	Id           int    `json:"id"`
 	Nombre       string `json:"nombre"`
 	IdModulo     int    `json:"id_modulo"`

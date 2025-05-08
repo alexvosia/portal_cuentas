@@ -29,7 +29,7 @@ func (h *ChecaDataHandler) GetCoordinadoresHandler(w http.ResponseWriter, r *htt
 	respondJSON(w, http.StatusOK, coordinadores)
 }
 
-func (h *ChecaDataHandler) GetResponsablesHandler(w http.ResponseWriter, r *http.Request) {
+func (h *ChecaDataHandler) GetPosiblesResponsablesHandler(w http.ResponseWriter, r *http.Request) {
 	// Implementar la lógica para manejar la solicitud de obtener todos los responsables
 	vars := mux.Vars(r)
 	coordinador, err := strconv.Atoi(vars["coordinador"])

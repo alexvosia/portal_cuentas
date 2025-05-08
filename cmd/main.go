@@ -32,12 +32,27 @@ func main() {
 
 	// Configurar Provider MSSQL
 	mssqlRepo := pic_repo.NewMSSQLModuleRepo(db)
+
 	// Crear el servicio de repositorio de módulos
 	moduleservice := usecases.NewModuleService(mssqlRepo)
 	// Crear el handler de Módulos
 	moduleHandler := handlers.NewModuleHandler(moduleservice)
 	// Configurar las rutas de modulos en la API
 	api.RegisterModuleRoutes(router, moduleHandler)
+
+	// Crear el servicio de repositorio de responsables
+	responsableService := usecases.NewResponsableService(mssqlRepo)
+	// Crear el handler de responsables
+	responsableHandler := handlers.NewResponsableHandler(responsableService)
+	// Configurar las rutas de responsables en la API
+	api.RegisterResponsableRoutes(router, responsableHandler)
+
+	// Crear el servicio de repositorio de files
+	fileService := usecases.NewFileService(mssqlRepo)
+	// Crear el handler de files
+	fileHandler := handlers.NewFileHandler(fileService)
+	// Configurar las rutas de files en la API
+	api.RegisterFileRoutes(router, fileHandler)
 
 	// Configurar el Provider ORCLChecaData
 	checaDataRepo := checa_data.NewORCLChecaData(db)
@@ -49,13 +64,13 @@ func main() {
 	api.RegisterChecaDataRoutes(router, checaDataHandler)
 
 	// Configurar el Provider DUCKFileRepo
-	fileRepo := duck_repo.NewDUCKFileRepo(db)
+	rowsRepo := duck_repo.NewDUCKFileRepo(db)
 	// Crear el servicio de repositorio de Archivos
-	fileService := usecases.NewDuckFileService(fileRepo)
+	rowsService := usecases.NewDuckFileService(rowsRepo)
 	// Crear el handler de Archivos
-	fileHandler := handlers.NewFileHandler(fileService)
+	rowsHandler := handlers.NewFileHandler(rowsService)
 	// Configurar las rutas de Archivos en la API
-	api.RegisterFileRoutes(router, fileHandler)
+	api.RegisterFileRoutes(router, rowsHandler)
 
 	// Iniciar el servidor
 	log.Println("Iniciando servidor en :8080")

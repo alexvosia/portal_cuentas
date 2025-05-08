@@ -15,7 +15,7 @@ func NewDuckFileService(fileRepo ports.FileRepo) *DuckFileService {
 	}
 }
 
-func (d *DuckFileService) InsertFile(file entities.FileCSV) (int, error) {
+func (d *DuckFileService) InsertFile(file entities.RegistryFileCSV) (int, error) {
 	id, err := d.FileRepo.InsertFile(file)
 	if err != nil {
 		return 0, err
@@ -23,7 +23,7 @@ func (d *DuckFileService) InsertFile(file entities.FileCSV) (int, error) {
 	return id, nil
 }
 
-func (d *DuckFileService) FindFileByID(id int) (*entities.FileCSV, error) {
+func (d *DuckFileService) FindFileByID(id int) (*entities.RegistryFileCSV, error) {
 	file, err := d.FileRepo.FindFileByID(id)
 	if err != nil {
 		return nil, err
@@ -31,7 +31,7 @@ func (d *DuckFileService) FindFileByID(id int) (*entities.FileCSV, error) {
 	return file, nil
 }
 
-func (d *DuckFileService) FindFilesByModule(idModule int) ([]entities.FileCSV, error) {
+func (d *DuckFileService) FindFilesByModule(idModule int) ([]entities.RegistryFileCSV, error) {
 	files, err := d.FileRepo.FindFilesByModule(idModule)
 	if err != nil {
 		return nil, err

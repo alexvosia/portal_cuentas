@@ -31,14 +31,14 @@ type ChecaDataAPI interface {
 	GetAreas(ctx context.Context) ([]entities.ChecaArea, error)
 }
 
-type FileAPI interface {
-	CreateFile(ctx context.Context, nombre string, idModulo int, tipoRegistro string, creador int) error
-	GetFilesByModulo(ctx context.Context, idModulo int) ([]entities.FileCSV, error)
-	SetFin(ctx context.Context, idFile int, upper int) (*entities.FileCSV, error)
+type RegistryFileAPI interface {
+	CreateRegistryFile(ctx context.Context, nombre string, idModulo int, tipoRegistro string, creador int) error
+	GetRegistryFilesByModulo(ctx context.Context, idModulo int) ([]entities.RegistryFileCSV, error)
+	SetFinRegistryFile(ctx context.Context, idFile int, upper int) (*entities.RegistryFileCSV, error)
 }
 
 type ResponsableAPI interface {
-	GetResponsablesByCoordinador(ctx context.Context, idCoordinador int) (*entities.Responsables, error)
+	GetResponsablesConfigurados(ctx context.Context, idCoordinador int) (*entities.Responsables, error)
 }
 
 type CuentaAPI interface {

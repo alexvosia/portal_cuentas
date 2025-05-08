@@ -15,15 +15,15 @@ func NewDUCKFileRepo(db *sql.DB) *DUCKFileRepo {
 	}
 }
 
-func (d *DUCKFileRepo) InsertFile(file entities.FileCSV) (int, error) {
+func (d *DUCKFileRepo) InsertFile(file entities.RegistryFileCSV) (int, error) {
 	return 0, nil
 }
 
-func (d *DUCKFileRepo) FindFileByID(id int) (*entities.FileCSV, error) {
+func (d *DUCKFileRepo) FindFileByID(id int) (*entities.RegistryFileCSV, error) {
 	return nil, nil
 }
 
-func (d *DUCKFileRepo) FindFilesByModule(idModule int) ([]entities.FileCSV, error) {
+func (d *DUCKFileRepo) FindFilesByModule(idModule int) ([]entities.RegistryFileCSV, error) {
 	return nil, nil
 }
 
