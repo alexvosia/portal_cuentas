@@ -66,7 +66,7 @@ func main() {
 	// Configurar el Provider DUCKFileRepo
 	rowsRepo := duck_repo.NewDUCKFileRepo(db)
 	// Crear el servicio de repositorio de Archivos
-	rowsService := usecases.NewDuckFileService(rowsRepo)
+	rowsService := usecases.NewFileService(rowsRepo)
 	// Crear el handler de Archivos
 	rowsHandler := handlers.NewFileHandler(rowsService)
 	// Configurar las rutas de Archivos en la API

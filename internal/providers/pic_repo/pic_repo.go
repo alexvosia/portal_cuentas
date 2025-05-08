@@ -16,6 +16,25 @@ func NewMSSQLModuleRepo(db *sql.DB) *MSSQLModuleRepo {
 		DB: db,
 	}
 }
+func (M MSSQLModuleRepo) InsertResponsable(responsable entities.Responsables) (int, error) {
+	//TODO implement me
+	panic("implement me")
+}
+
+func (M MSSQLModuleRepo) FindResponsableByCoordinador(idCoordinador int) (*entities.Responsables, error) {
+	//TODO implement me
+	panic("implement me")
+}
+
+func (M MSSQLModuleRepo) FindResponsableByID(id int) (*entities.Responsables, error) {
+	row := M.DB.QueryRow("SELECT * FROM coordinador_analista WHERE ID = ?", id)
+	responsable := &entities.Responsables{}
+	err := row.Scan(&responsable.Id, &responsable.IdCoordinador, &responsable.IdResponsable1, &responsable.IdResponsable2, &responsable.Fin, &responsable.Creador, &responsable.Upper)
+	if err != nil {
+		return nil, err
+	}
+	return responsable, nil
+}
 
 func (M MSSQLModuleRepo) InsertModule(module entities.Module) (int, error) {
 	exec, err := M.DB.Exec("INSERT INTO Modulos (Nombre, Descripcion,Coordinador) VALUES (?, ?, ?)", module.Nombre, module.Descripcion, module.Coordinador)
@@ -121,16 +140,6 @@ func (M MSSQLModuleRepo) UpdateModule(module entities.Module) error {
 		return err
 	}
 	return nil
-}
-
-func (M MSSQLModuleRepo) FindResponsableByID(id int) (*entities.Responsables, error) {
-	row := M.DB.QueryRow("SELECT * FROM coordinador_analista WHERE ID = ?", id)
-	responsable := &entities.Responsables{}
-	err := row.Scan(&responsable.Id, &responsable.IdCoordinador, &responsable.IdResponsable1, &responsable.IdResponsable2, &responsable.Fin, &responsable.Creador, &responsable.Upper)
-	if err != nil {
-		return nil, err
-	}
-	return responsable, nil
 }
 
 func (M MSSQLModuleRepo) FindUserBySSFF(id int) (*entities.User, error) {

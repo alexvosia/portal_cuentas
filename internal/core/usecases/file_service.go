@@ -1,6 +1,8 @@
 package usecases
 
 import (
+	"context"
+	"errors"
 	"infctas/internal/core/entities"
 	"infctas/internal/core/ports"
 )
@@ -9,10 +11,22 @@ type DuckFileService struct {
 	FileRepo ports.FileRepo
 }
 
-func NewDuckFileService(fileRepo ports.FileRepo) *DuckFileService {
+func NewFileService(fileRepo ports.FileRepo) *DuckFileService {
 	return &DuckFileService{
 		FileRepo: fileRepo,
 	}
+}
+
+func (d *DuckFileService) CreateRegistryFile(ctx context.Context, nombre string, idModulo int, tipoRegistro string, creador int) error {
+	return errors.New("not implemented")
+}
+
+func (d *DuckFileService) GetRegistryFilesByModulo(ctx context.Context, idModulo int) ([]entities.RegistryFileCSV, error) {
+	return nil, errors.New("not implemented")
+}
+
+func (d *DuckFileService) SetFinRegistryFile(ctx context.Context, idFile int, upper int) (*entities.RegistryFileCSV, error) {
+	return nil, errors.New("not implemented")
 }
 
 func (d *DuckFileService) InsertFile(file entities.RegistryFileCSV) (int, error) {
