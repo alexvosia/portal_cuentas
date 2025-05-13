@@ -6,6 +6,7 @@ import (
 
 	_ "github.com/denisenkom/go-mssqldb"
 	_ "github.com/godror/godror"
+	_ "github.com/joho/godotenv"
 	_ "github.com/marcboeker/go-duckdb"
 )
 
@@ -83,7 +84,13 @@ func (c DbConn) CloseConn(entorno string) error {
 	return nil
 }
 
-func getConfigJSON() error {
+func getConfigDotENV() error {
+	// Load environment variables from .env file
+	err := godotenv.Load("./config.env")
+	if err != nil {
+		log.Fatalf("Error loading .env file")
+		return err
+	}
 
 	return nil
 }

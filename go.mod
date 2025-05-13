@@ -6,6 +6,7 @@ require (
 	github.com/denisenkom/go-mssqldb v0.12.3
 	github.com/godror/godror v0.48.2
 	github.com/gorilla/mux v1.8.1
+	github.com/joho/godotenv v1.5.1
 	github.com/marcboeker/go-duckdb v1.8.5
 )
 
