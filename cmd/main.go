@@ -1,6 +1,7 @@
 package main
 
 import (
+	"infctas/internal/config"
 	"infctas/internal/core/domain"
 	"infctas/internal/drivers/api"
 	"infctas/internal/drivers/api/handlers"
@@ -12,11 +13,32 @@ import (
 )
 
 func main() {
+	// Inicializar la base de datos
+	dbManager := config.GetDBManager()
+	dbCheca, err := dbManager.GetConn("checa")
+	if err != nil {
+		log.Fatalf("Error al conectar a la base de datos Checa: %v", err)
+	}
+	dbPic, err := dbManager.GetConn("pic")
+	if err != nil {
+		log.Fatalf("Error al conectar a la base de datos PIC: %v", err)
+	}
+	dbDuck, err := dbManager.GetConn("duck")
+	if err != nil {
+		log.Fatalf("Error al conectar a la base de datos Duck: %v", err)
+	}
+
+	defer func() {
+		if err := dbManager.CloseAll(); err != nil {
+			log.Fatalf("Error al cerrar las conexiones: %v", err)
+		}
+	}()
+
 	// Crear el router
 	router := api.NewRouter()
 
 	// Configurar Provider MSSQL
-	mssqlRepo := pic_repo.NewMSSQLModuleRepo(db)
+	mssqlRepo := pic_repo.NewMSSQLModuleRepo(dbPic)
 
 	// Crear el servicio de repositorio de módulos
 	moduleservice := domain.NewModuleService(mssqlRepo)
@@ -40,7 +62,7 @@ func main() {
 	api.RegisterFileRoutes(router, fileHandler)
 
 	// Configurar el Provider ORCLChecaData
-	checaDataRepo := checa_data.NewORCLChecaData(db)
+	checaDataRepo := checa_data.NewORCLChecaData(dbCheca)
 	// Crear el servicio de repositorio de ChecaData
 	checaDataService := domain.NewChecaDataService(checaDataRepo)
 	// Crear el handler de ChecaData
@@ -49,7 +71,7 @@ func main() {
 	api.RegisterChecaDataRoutes(router, checaDataHandler)
 
 	// Configurar el Provider DUCKFileRepo
-	rowsRepo := duck_repo.NewDUCKFileRepo(db)
+	rowsRepo := duck_repo.NewDUCKFileRepo(dbDuck)
 	// Crear el servicio de repositorio de Archivos
 	rowsService := domain.NewFileService(rowsRepo)
 	// Crear el handler de Archivos
