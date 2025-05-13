@@ -53,6 +53,24 @@ func (m *DBManager) GetConn(entorno string) (*sql.DB, error) {
 	}
 }
 
+// GetHTTPServerConfig obtiene la configuración del servidor HTTP
+func (m *DBManager) GetHTTPServerConfig() (string, string, string, error) {
+	config, err := m.loadConfig()
+	if err != nil {
+		return "", "", "", err
+	}
+
+	port := config["http"]["port"]
+	cert := config["http"]["cert"]
+	key := config["http"]["key"]
+
+	if port == "" || cert == "" || key == "" {
+		return "", "", "", errors.New("configuración del servidor HTTP incompleta")
+	}
+
+	return port, cert, key, nil
+}
+
 // CloseAll cierra todas las conexiones activas
 func (m *DBManager) CloseAll() error {
 	var errs []error
@@ -253,6 +271,12 @@ func (m *DBManager) loadConfig() (map[string]map[string]string, error) {
 		"file": getEnv("DB_FILE_DUCK", "./local_db/duckdb.db"),
 	}
 
+	config["http"] = map[string]string{
+		"port": getEnv("HTTP_SERVER_PORT", "443"),
+		"cert": getEnv("HTTP_SERVER_CERT_FILE", "/dev/certs/certificado.crt"),
+		"key":  getEnv("HTTP_SERVER_KEY_FILE", "/dev/certs/clave-privada.key"),
+	}
+
 	// Validar configuraciones requeridas
 	if config["checa"]["user"] == "" || config["checa"]["password"] == "" || config["checa"]["host"] == "" {
 		return nil, errors.New("configuración de Oracle incompleta")
@@ -261,6 +285,14 @@ func (m *DBManager) loadConfig() (map[string]map[string]string, error) {
 	if config["pic"]["user"] == "" || config["pic"]["password"] == "" || config["pic"]["host"] == "" {
 		return nil, errors.New("configuración de MSSQL incompleta")
 	}
+
+	if config["duck"]["file"] == "" {
+		return nil, errors.New("configuración de DuckDB incompleta")
+	}
+
+	//if config["http"]["port"] == "" || config["http"]["cert"] == "" || config["http"]["key"] == "" {
+	//	return nil, errors.New("configuración de HTTP incompleta")
+	//}
 
 	return config, nil
 }
