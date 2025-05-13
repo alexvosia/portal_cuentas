@@ -5,6 +5,8 @@ import (
 	"log"
 
 	_ "github.com/denisenkom/go-mssqldb"
+	_ "github.com/godror/godror"
+	_ "github.com/marcboeker/go-duckdb"
 )
 
 type ConnDb interface {
@@ -12,48 +14,76 @@ type ConnDb interface {
 	CloseConn() error
 }
 
-type ChecaConn struct {
-	Db *sql.DB
+type DbConn struct {
+	Db ConnDb
 }
 
-var checaConn *ChecaConn
+var checaConn *ConnDb
+var picConn *ConnDb
+var duckConn *ConnDb
 
-func (c ChecaConn) GetConn() *sql.DB {
-	//TODO implement me
-	panic("implement me")
-}
-
-type PicConn struct {
-	Db *sql.DB
-}
-
-func (p PicConn) GetConn() *sql.DB {
-	db, err := sql.Open("sqlserver", "sqlserver://pic_owner:pic_1234@localhost:1433?database=pic")
-}
-
-type DuckConn struct {
-	Db *sql.DB
-}
-
-func GetDB() *DB {
-	if db == nil {
-		db = &DB{}
+func (c DbConn) GetConn(entorno string) *sql.DB {
+	switch entorno {
+	case "checa":
+		if checaConn == nil {
+			db, err := sql.Open("godror", "user=checa_owner password=checa_1234 connectString=localhost:1521/xe")
+			if err != nil {
+				log.Fatal(err)
+			}
+			checaConn.Db = db
+		}
+		return checaConn.Db
+	case "pic":
+		if picConn == nil {
+			db, err := sql.Open("sqlserver", "sqlserver://pic_owner:pic_1234@localhost:1433?database=pic")
+			if err != nil {
+				log.Fatal(err)
+			}
+			picConn.Db = db
+		}
+		return picConn.Db
+	case "duck":
+		if duckConn == nil {
+			db, err := sql.Open("duckdb", "file=./local_db/duckdb.db")
+			if err != nil {
+				log.Fatal(err)
+			}
+			duckConn.Db = db
+		}
 	}
-	return db
-}
 
-func NewMSSQLConn() *sql.DB {
-	// Configurar conexión a la base de datos
-	db, err := sql.Open("sqlserver", "sqlserver://pic_owner:pic_1234@localhost:1433?database=pic")
-	if err != nil {
-		log.Fatal(err)
+}
+func (c DbConn) CloseConn(entorno string) error {
+	switch entorno {
+	case "checa":
+		if checaConn != nil {
+			err := checaConn.Db.Close()
+			if err != nil {
+				return err
+			}
+			checaConn = nil
+		}
+	case "pic":
+		if picConn != nil {
+			err := picConn.Db.Close()
+			if err != nil {
+				return err
+			}
+			picConn = nil
+		}
+	case "duck":
+		if duckConn != nil {
+			err := duckConn.Db.Close()
+			if err != nil {
+				return err
+			}
+			duckConn = nil
+		}
 	}
-	return db
+	return nil
 }
 
-//defer func(db *sql.DB) {
-//	err := db.Close()
-//	if err != nil {
-//		log.Fatal(err)
-//	}
-//}(db)
+func getConfigJSON() error {
+
+	return nil
+}

@@ -28,34 +28,34 @@ func CorsMiddleware(next http.Handler) http.Handler {
 }
 
 func RegisterModuleRoutes(r *mux.Router, handlers *handlers.ModuleHandler) {
-	r.HandleFunc("/createModulo", handlers.CreateModuloHandler).Methods("POST")
-	r.HandleFunc("/getModulo/{idModulo}", handlers.GetModuloHandler).Methods("GET")
-	r.HandleFunc("/getModulos/{rol}", handlers.GetModulosHandler).Methods("GET")
-	r.HandleFunc("/setStatusModulo/{idModulo}/{status}/{user}", handlers.SetStatusModuloHandler).Methods("PUT")
-	r.HandleFunc("/setCoordinador/{idModulo}/{coordinador}/{user}", handlers.SetCoordinadorHandler).Methods("PUT")
-	r.HandleFunc("/setResponsable/{idModulo}/{coordinador}/{responsable1}/{responsable2}/{user}", handlers.SetResponsableHandler).Methods("PUT")
-	r.HandleFunc("/setAreas/{idModulo}/{areas}/{user}", handlers.SetAreasHandler).Methods("PUT")
-	r.HandleFunc("/setScript/{idModulo}/{script}/{user}", handlers.SetScriptHandler).Methods("PUT")
-	r.HandleFunc("/setMail/{idModulo}/{mail}/{user}", handlers.SetMailHandler).Methods("PUT")
-	r.HandleFunc("/setDescripcion/{idModulo}/{descripcion}/{user}", handlers.SetDescripcionHandler).Methods("PUT")
+	r.HandleFunc("/modulo", handlers.CreateModuloHandler).Methods("POST")
+	r.HandleFunc("/modulo/{idModulo}", handlers.GetModuloHandler).Methods("GET")
+	r.HandleFunc("/modulos/{rol}", handlers.GetModulosHandler).Methods("GET")
+	r.HandleFunc("/statusModulo/{idModulo}/{status}/{user}", handlers.SetStatusModuloHandler).Methods("PUT")
+	r.HandleFunc("/coordinador/{idModulo}/{coordinador}/{user}", handlers.SetCoordinadorHandler).Methods("PUT")
+	r.HandleFunc("/responsable/{idModulo}/{coordinador}/{responsable1}/{responsable2}/{user}", handlers.SetResponsableHandler).Methods("PUT")
+	r.HandleFunc("/areas/{idModulo}/{areas}/{user}", handlers.SetAreasHandler).Methods("PUT")
+	r.HandleFunc("/script/{idModulo}/{script}/{user}", handlers.SetScriptHandler).Methods("PUT")
+	r.HandleFunc("/mail/{idModulo}/{mail}/{user}", handlers.SetMailHandler).Methods("PUT")
+	r.HandleFunc("/descripcion/{idModulo}/{descripcion}/{user}", handlers.SetDescripcionHandler).Methods("PUT")
 }
 
 func RegisterChecaDataRoutes(r *mux.Router, handlers *handlers.ChecaDataHandler) {
-	r.HandleFunc("getCoordinadores", handlers.GetCoordinadoresHandler).Methods("GET")
-	r.HandleFunc("getPosiblesResponsables/{coordinador}", handlers.GetPosiblesResponsablesHandler).Methods("GET")
-	r.HandleFunc("getAreas", handlers.GetAreasHandler).Methods("GET")
+	r.HandleFunc("/coordinadores", handlers.GetCoordinadoresHandler).Methods("GET")
+	r.HandleFunc("/posiblesResponsables/{coordinador}", handlers.GetPosiblesResponsablesHandler).Methods("GET")
+	r.HandleFunc("/areas", handlers.GetAreasHandler).Methods("GET")
 }
 
 func RegisterFileRoutes(r *mux.Router, handlers *handlers.RegistryFileHandler) {
-	r.HandleFunc("/createFile", handlers.CreateRegistryFileHandler).Methods("POST")
-	r.HandleFunc("/getFilesByModulo/{idModulo}", handlers.GetFileRegistryByModuloHandler).Methods("GET")
-	r.HandleFunc("/deleteFile/{idFile}/{upper}", handlers.SetFinHandler).Methods("PUT")
+	r.HandleFunc("/file", handlers.CreateRegistryFileHandler).Methods("POST")
+	r.HandleFunc("/filesByModulo/{idModulo}", handlers.GetFileRegistryByModuloHandler).Methods("GET")
+	r.HandleFunc("/file/{idFile}/{upper}", handlers.SetFinHandler).Methods("DELETE")
 }
 
 func RegisterResponsableRoutes(r *mux.Router, handlers *handlers.ResponsableHandler) {
-	r.HandleFunc("/getResponsablesConfigurados/{coordinador}", handlers.GetResponsablesConfiguradosHandler).Methods("GET")
+	r.HandleFunc("/responsablesConfigurados/{coordinador}", handlers.GetResponsablesConfiguradosHandler).Methods("GET")
 }
 
 func RegisterCuentaRoutes(r *mux.Router, handlers *handlers.CuentaHandler) {
-	r.HandleFunc("/getInfoCuenta/{cuenta}/{idArea}", handlers.GetInfoCuentaHandler).Methods("GET")
+	r.HandleFunc("/infoCuenta/{cuenta}/{idArea}", handlers.GetInfoCuentaHandler).Methods("GET")
 }
