@@ -79,8 +79,8 @@ func (M MSSQLModuleRepo) FindModuleByID(id int) (*entities.Module, error) {
 	}
 
 	module.Coordinador = coord.Nombre
-	module.Respoonsable1 = resp1.Nombre
-	module.Respoonsable2 = resp2.Nombre
+	module.Responsable1 = resp1.Nombre
+	module.Responsable2 = resp2.Nombre
 
 	return module, nil
 }
@@ -126,8 +126,8 @@ func (M MSSQLModuleRepo) FindAllModules(role string) ([]entities.Module, error) 
 		}
 
 		module.Coordinador = coord.Nombre
-		module.Respoonsable1 = resp1.Nombre
-		module.Respoonsable2 = resp2.Nombre
+		module.Responsable1 = resp1.Nombre
+		module.Responsable2 = resp2.Nombre
 
 		modules = append(modules, module)
 	}

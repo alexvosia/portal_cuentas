@@ -3,12 +3,33 @@ package api
 import (
 	"github.com/gorilla/mux"
 	"infctas/internal/drivers/api/handlers"
+	"net/http"
 )
 
 func NewRouter() *mux.Router {
 	router := mux.NewRouter()
-
 	return router
+}
+
+// Crear middleware para manejar CORS
+func CorsMiddleware(next http.Handler) http.Handler {
+	return http.HandlerFunc(func(w http.ResponseWriter, r *http.Request) {
+		w.Header().Set("Access-Control-Allow-Origin", "*")
+		w.Header().Set("Access-Control-Allow-Methods", "GET, POST, PUT, DELETE, OPTIONS")
+		w.Header().Set("Access-Control-Allow-Headers", "Content-Type, Authorization")
+
+		if r.Method == http.MethodOptions {
+			w.WriteHeader(http.StatusOK)
+			return
+		}
+
+		next.ServeHTTP(w, r)
+	})
+}
+
+// useCorsMiddleware aplica el middleware de CORS a todas las rutas
+func useCorsMiddleware(router *mux.Router) {
+	router.Use(CorsMiddleware)
 }
 
 func RegisterModuleRoutes(r *mux.Router, handlers *handlers.ModuleHandler) {
