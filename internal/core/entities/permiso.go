@@ -1,18 +1,18 @@
 package entities
 
 type Permiso struct {
-	Id     int    `json:"id"`
-	Codigo string `json:"codigo"`
-	Accion string `json:"accion"`
+	Id     int
+	Codigo string
+	Accion string
 }
 
 type Role struct {
-	Id   int    `json:"id"`
-	Role string `json:"rol"`
+	Id   int
+	Role string
 }
 
 type RolePermiso struct {
-	Id        int `json:"id"`
-	IdPermiso int `json:"id_permiso"`
-	IdRole    int `json:"id_rol"`
+	Id      int
+	Permiso Permiso
+	Role    Role
 }

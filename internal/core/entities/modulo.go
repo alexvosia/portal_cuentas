@@ -3,26 +3,25 @@ package entities
 import "time"
 
 type Module struct {
-	Id          int          `json:"id"`
-	Nombre      string       `json:"nombre"`
-	Descripcion string       `json:"descripcion"`
-	Estado      int          `json:"estado"`
-	Alcance     string       `json:"alcance"`
-	Coordinador Responsables `json:"coordinador"`
-	Script      string       `json:"script"`
-	Mail        string       `json:"mail"`
-	Columna1    string       `json:"columna1"`
-	Columna2    string       `json:"columna2"`
-	Columna3    string       `json:"columna3"`
-	Columna4    string       `json:"columna4"`
-	Columna5    string       `json:"columna5"`
-	Columna6    string       `json:"columna6"`
-	Columna7    string       `json:"columna7"`
-	Columna8    string       `json:"columna8"`
-	Columna9    string       `json:"columna9"`
-	Inicio      time.Time    `json:"inicio"`
-	Fin         time.Time    `json:"fin"`
-	Creador     User         `json:"creador"`
-	Upper       User         `json:"upper"`
-	repo        ChecaDataRepop
+	Id          int
+	Nombre      string
+	Descripcion string
+	Estado      int
+	Alcance     string
+	Responsable Responsables
+	Script      string
+	Mail        string
+	Columna1    string
+	Columna2    string
+	Columna3    string
+	Columna4    string
+	Columna5    string
+	Columna6    string
+	Columna7    string
+	Columna8    string
+	Columna9    string
+	Inicio      time.Time
+	Fin         time.Time
+	Creador     User
+	Upper       User
 }

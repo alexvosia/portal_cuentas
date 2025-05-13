@@ -1,16 +1,11 @@
 package entities
 
-type ChecaCoordinador struct {
-	SSFF   int    `json:"ssff"`
-	Nombre string `json:"nombre"`
-}
-
-type ChecaResponsable struct {
-	SSFF   int    `json:"ssff"`
-	Nombre string `json:"nombre"`
-}
-
 type ChecaArea struct {
-	Id   int    `json:"id"`
-	Area string `json:"area"`
+	Id   int
+	Area string
+}
+
+type ChecaEmpleado struct {
+	SSFF   int
+	Nombre string
 }

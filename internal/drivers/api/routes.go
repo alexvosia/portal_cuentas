@@ -8,10 +8,11 @@ import (
 
 func NewRouter() *mux.Router {
 	router := mux.NewRouter()
+	router.Use(CorsMiddleware)
 	return router
 }
 
-// Crear middleware para manejar CORS
+// CorsMiddleware crea un middleware para manejar CORS
 func CorsMiddleware(next http.Handler) http.Handler {
 	return http.HandlerFunc(func(w http.ResponseWriter, r *http.Request) {
 		w.Header().Set("Access-Control-Allow-Origin", "*")
@@ -22,14 +23,8 @@ func CorsMiddleware(next http.Handler) http.Handler {
 			w.WriteHeader(http.StatusOK)
 			return
 		}
-
 		next.ServeHTTP(w, r)
 	})
-}
-
-// useCorsMiddleware aplica el middleware de CORS a todas las rutas
-func useCorsMiddleware(router *mux.Router) {
-	router.Use(CorsMiddleware)
 }
 
 func RegisterModuleRoutes(r *mux.Router, handlers *handlers.ModuleHandler) {
