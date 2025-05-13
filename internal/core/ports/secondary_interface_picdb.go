@@ -3,10 +3,10 @@ package ports
 import "infctas/internal/core/entities"
 
 type ModuleRepo interface {
-	InsertModule(module entities.Module) (int, error)
-	FindModuleByID(id int) (*entities.Module, error)
-	FindAllModules(rol string) ([]entities.Module, error)
-	UpdateModule(module entities.Module) error
+	InsertModule(module entities.Seccion) (int, error)
+	FindModuleByID(id int) (*entities.Seccion, error)
+	FindAllModules(rol string) ([]entities.Seccion, error)
+	UpdateModule(module entities.Seccion) error
 }
 
 type FileRepo interface {

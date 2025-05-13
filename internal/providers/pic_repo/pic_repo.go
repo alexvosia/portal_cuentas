@@ -36,7 +36,7 @@ func (M MSSQLModuleRepo) FindResponsableByID(id int) (*entities.Responsables, er
 	return responsable, nil
 }
 
-func (M MSSQLModuleRepo) InsertModule(module entities.Module) (int, error) {
+func (M MSSQLModuleRepo) InsertModule(module entities.Seccion) (int, error) {
 	exec, err := M.DB.Exec("INSERT INTO Modulos (Nombre, Descripcion,Coordinador) VALUES (?, ?, ?)", module.Nombre, module.Descripcion, module.Coordinador)
 	if err != nil {
 		return 0, err
@@ -48,9 +48,9 @@ func (M MSSQLModuleRepo) InsertModule(module entities.Module) (int, error) {
 	return int(id), nil
 }
 
-func (M MSSQLModuleRepo) FindModuleByID(id int) (*entities.Module, error) {
+func (M MSSQLModuleRepo) FindModuleByID(id int) (*entities.Seccion, error) {
 	row := M.DB.QueryRow("SELECT * FROM Modulos WHERE ID = ?", id)
-	module := &entities.Module{}
+	module := &entities.Seccion{}
 	inResp := &entities.Responsables{}
 	coord := &entities.User{}
 	resp1 := &entities.User{}
@@ -85,7 +85,7 @@ func (M MSSQLModuleRepo) FindModuleByID(id int) (*entities.Module, error) {
 	return module, nil
 }
 
-func (M MSSQLModuleRepo) FindAllModules(role string) ([]entities.Module, error) {
+func (M MSSQLModuleRepo) FindAllModules(role string) ([]entities.Seccion, error) {
 	rows, err := M.DB.Query("SELECT * FROM Modulos WHERE Status != 'eliminado' AND fechaeliminacion IS NULL")
 	if err != nil {
 		return nil, err
@@ -97,9 +97,9 @@ func (M MSSQLModuleRepo) FindAllModules(role string) ([]entities.Module, error) 
 		}
 	}(rows)
 
-	var modules []entities.Module
+	var modules []entities.Seccion
 	for rows.Next() {
-		module := entities.Module{}
+		module := entities.Seccion{}
 		inResp := &entities.Responsables{}
 		coord := &entities.User{}
 		resp1 := &entities.User{}
@@ -134,7 +134,7 @@ func (M MSSQLModuleRepo) FindAllModules(role string) ([]entities.Module, error) 
 	return modules, nil
 }
 
-func (M MSSQLModuleRepo) UpdateModule(module entities.Module) error {
+func (M MSSQLModuleRepo) UpdateModule(module entities.Seccion) error {
 	_, err := M.DB.Exec("UPDATE Modulos SET Nombre = ?, Descripcion = ?, Status = ?, CoordinadorID = ? WHERE ID = ?", module.Nombre, module.Descripcion, module.Estado, module.Coordinador, module.Id)
 	if err != nil {
 		return err

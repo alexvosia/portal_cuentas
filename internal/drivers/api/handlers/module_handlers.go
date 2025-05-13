@@ -21,7 +21,7 @@ func NewModuleHandler(api ports.MouduleAPI) *ModuleHandler {
 
 func (h *ModuleHandler) CreateModuloHandler(w http.ResponseWriter, r *http.Request) {
 	// Implementar la lógica para manejar la solicitud de crear un módulo
-	var module entities.Module
+	var module entities.Seccion
 	if err := json.NewDecoder(r.Body).Decode(&module); err != nil {
 		respondError(w, http.StatusBadRequest, "Invalid request payload")
 		return
